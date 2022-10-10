@@ -1,15 +1,21 @@
 #!/usr/bin/python3
-""" Cleanup function """
+""" Function that deploys """
 from fabric.api import *
 
 
-env.hosts = ['100.26.135.224', '3.235.226.56']
+env.hosts = ['18.232.49.74', '3.239.4.119']
+env.user = "ubuntu"
 
 
 def do_clean(number=0):
-    """ Deletes out of date archives """
+    """ CLEANS """
 
-    number = 2 if int(number) == 0 else (int(number) + 1)
+    number = int(number)
+
+    if number == 0:
+        number = 2
+    else:
+        number += 1
 
     local('cd versions ; ls -t | tail -n +{} | xargs rm -rf'.format(number))
     path = '/data/web_static/releases'
